@@ -8,6 +8,7 @@ A distributed file system implementation that handles different file types acros
 - **S2**: Handles `.pdf` files
 - **S3**: Handles `.txt` files
 - **S4**: Handles `.zip` files
+- **Client**: Provides user interface to interact with the distributed file system
 
 ## Features
 
@@ -134,4 +135,55 @@ The system includes comprehensive debug messages that can help in:
 - GCC compiler
 - Standard C libraries
 - Network connectivity between servers
-- Write permissions in home directory 
+- Write permissions in home directory
+
+## Client Implementation
+
+### Building the Client
+```bash
+gcc -o dfs_client client.c
+```
+
+### Client Usage
+```bash
+./dfs_client <command> [arguments]
+```
+
+### Client Features
+- Direct connection to S1 (main server)
+- Command-line interface for all file operations
+- Automatic file type detection
+- Progress indicators for file transfers
+- Error reporting and status messages
+- Session management
+
+### Example Client Commands
+```bash
+# Upload a C file
+./dfs_client uploadf ~/mycode.c ~/S1/projects/
+
+# Download a PDF file
+./dfs_client downlf ~/S1/documents/report.pdf
+
+# List files in a directory
+./dfs_client dispfnames ~/S1/projects/
+
+# Remove a text file
+./dfs_client removef ~/S1/notes/todo.txt
+
+# Create and download a tar of all PDF files
+./dfs_client downltar .pdf
+```
+
+### Client Error Handling
+- Connection failure recovery
+- Timeout handling
+- Invalid command detection
+- File access error reporting
+- Server availability checking
+
+### Client Configuration
+- Default connection to localhost:5600 (S1)
+- Configurable timeout settings
+- Adjustable buffer sizes for file transfers
+- Debug mode for verbose output 
